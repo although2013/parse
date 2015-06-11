@@ -282,14 +282,14 @@
 <table width="772" height="28" border="0" align="center" >
   <tr>
   <td align="center" colspan="2">
-<form name="report1_turnPageForm" method=post action="http://192.168.11.239:80/reportFiles/zhjwcx/syxqcjxx/zhjwcx_syxqcjxx_jtcjcx.jsp?1433947905049" style="display:none">
+<form name="report1_turnPageForm" method=post action="http://192.168.11.239:80/reportFiles/zhjwcx/syxqcjxx/zhjwcx_syxqcjxx_jtcjcx.jsp?1434006915384" style="display:none">
 <input type=hidden name="bjh" value="">
 <input type=hidden name="xsh" value="05">
 <input type=hidden name="zxjxjhh" value="2014-2015-2-1">
-<input type=hidden name=reportParamsId value=102367>
+<input type=hidden name=reportParamsId value=102394>
 <input type=hidden name=report1_currPage value="">
-<input type=hidden name=report1_sessionId value=3382>
-<input type=hidden name=report1_cachedId value=3381>
+<input type=hidden name=report1_sessionId value=3435>
+<input type=hidden name=report1_cachedId value=3434>
 </form><script language=javascript>
 	function report1_toPage( pageNo ) {
 	if( pageNo < 1 || pageNo > report1_getTotalPage() ) return;
@@ -307,26 +307,26 @@
 </script>
 <script language=javascript>
 	function report1_saveAsExcel() {
-		var address = "http://192.168.11.239:80/servlet/com.runqian.report.view.excel.ConfigExcelServlet?url=http%3A%2F%2F192.168.11.239%3A80%2Fservlet%2Fcom.runqian.report.view.excel.ExcelReportServlet%3Ffile%3Dzhjwcx%2Fsyxqcjxx%2Fzhjwcx_syxqcjxx_jtcjcx.raq%26columns%3D0%26srcType%3Dfile%26width%3D-1%26height%3D1000%26reportParamsId%3D102367%26cachedId%3D3381%26t_i_m_e%3D1433947905049";
+		var address = "http://192.168.11.239:80/servlet/com.runqian.report.view.excel.ConfigExcelServlet?url=http%3A%2F%2F192.168.11.239%3A80%2Fservlet%2Fcom.runqian.report.view.excel.ExcelReportServlet%3Ffile%3Dzhjwcx%2Fsyxqcjxx%2Fzhjwcx_syxqcjxx_jtcjcx.raq%26columns%3D0%26srcType%3Dfile%26width%3D-1%26height%3D1000%26reportParamsId%3D102394%26cachedId%3D3434%26t_i_m_e%3D1434006915384";
 		window.open( address + "&frame=report1_saveAs_frame", "", "width=300, height=180, left=250, top=200, status=no resizable=yes" );
 	}
 </script>
 <script language=javascript>
 	function report1_saveAsPdf() {
-		document.getElementById( "report1_saveAs_frame" ).src = "http://192.168.11.239:80/servlet/com.runqian.report.view.pdf.PdfReportServlet?file=zhjwcx/syxqcjxx/zhjwcx_syxqcjxx_jtcjcx.raq&columns=0&srcType=file&reportParamsId=102367&cachedId=3381&t_i_m_e=1433947905049";
+		document.getElementById( "report1_saveAs_frame" ).src = "http://192.168.11.239:80/servlet/com.runqian.report.view.pdf.PdfReportServlet?file=zhjwcx/syxqcjxx/zhjwcx_syxqcjxx_jtcjcx.raq&columns=0&srcType=file&reportParamsId=102394&cachedId=3434&t_i_m_e=1434006915384";
 	}
 </script>
 
 <iframe name="report1_saveAs_frame" id="report1_saveAs_frame" src="a.html" style="display:none"></iframe>
 <script language=javascript>
 	function report1_saveAsText() {
-		document.getElementById( "report1_saveAs_frame" ).src = "http://192.168.11.239:80/servlet/com.runqian.report.view.text.TextFileServlet?file=zhjwcx/syxqcjxx/zhjwcx_syxqcjxx_jtcjcx.raq&srcType=file&separator=%09&reportParamsId=102367&cachedId=3381&t_i_m_e=1433947905049";
+		document.getElementById( "report1_saveAs_frame" ).src = "http://192.168.11.239:80/servlet/com.runqian.report.view.text.TextFileServlet?file=zhjwcx/syxqcjxx/zhjwcx_syxqcjxx_jtcjcx.raq&srcType=file&separator=%09&reportParamsId=102394&cachedId=3434&t_i_m_e=1434006915384";
 	}
 </script>
 
 <script language=javascript>
 	function report1_print() {
-		document.getElementById( "report1_printIFrame" ).src = "http://192.168.11.239:80/servlet/com.runqian.report.view.html.PrintServlet?name=report1&reportFileName=zhjwcx/syxqcjxx/zhjwcx_syxqcjxx_jtcjcx.raq&canModifyBeforePrint=yes&srcType=file&reportParamsId=102367&cachedId=3381&t_i_m_e=1433947905049";
+		document.getElementById( "report1_printIFrame" ).src = "http://192.168.11.239:80/servlet/com.runqian.report.view.html.PrintServlet?name=report1&reportFileName=zhjwcx/syxqcjxx/zhjwcx_syxqcjxx_jtcjcx.raq&canModifyBeforePrint=yes&srcType=file&reportParamsId=102394&cachedId=3434&t_i_m_e=1434006915384";
 	}
 </script>
 <iframe name="report1_printIFrame" id="report1_printIFrame" src="a.html" style="position:absolute;left:-100px;top:-100px" width=50 height=50></iframe>
@@ -1003,7 +1003,8 @@
 		<td class="report1_3_1">080701</td>
 		<td class="report1_3_1">电子信息工程</td>
 	</tr>
-</table>
+</table><div style="color:#E3E6F2; font-family:宋体; font-size:9pt; padding-top:3px">北京清元优软科技有限公司 - - - URP高校教务管理系统</div>
+
   </tr>
 </table>
 </body>
