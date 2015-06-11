@@ -4,6 +4,13 @@ table {
   margin: 0px auto 0px auto;
 }
 
+
+.not-show-white {
+  color: white;
+  background-color: white;
+}
+
+
 .alert {
   width: 90%;
   max-width: 800px;

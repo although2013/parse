@@ -1,6 +1,6 @@
 require "getscore"
 require "erb"
-require "sinatra"
+
 
 
 
@@ -287,64 +287,24 @@ end
 
 
 
-Thread.new do
-loop do
-  me = CheckOne.new("2012021712", "1")
-  me.get_score
-  if me.different?
-    page = me.get_whole_page
-    File.open("class_page.tmp", "w") { |file| file.write page }
-    sleep 25
+table_html = []
+students = Students.new.all
 
-    try_download = lambda do
-      15.times do |index|
-        if "SUCCESS" == me.download_text(page)
-          puts "TRY SUCCESS"
-          return "TRY SUCCESS"
-        end
-        puts "#{index} fail"
-        sleep(3)
-      end
-      return "TRY FAILURE"
-    end
+parse = ParseFaculty.new(students)
+parse.collect_a_class_array("电信12-03")
+parse.parse_downloaded_faculty_score_txt
+table_html << parse.print_a_csv_list_user(parse.a_class_user_arr)
 
-    try_sign = try_download.call
+parse = ParseFaculty.new(students)
+parse.collect_a_class_array("电信12-01")
+parse.parse_downloaded_faculty_score_txt
+table_html << parse.print_a_csv_list_user(parse.a_class_user_arr)
 
-    if try_sign == "TRY FAILURE"
-      sleep(2*60*60)
-      next
-    elsif try_sign == "TRY SUCCESS"
-      table_html = []
-      students = Students.new.all
-
-      parse = ParseFaculty.new(students)
-      parse.collect_a_class_array("电信12-03")
-      parse.parse_downloaded_faculty_score_txt
-      table_html << parse.print_a_csv_list_user(parse.a_class_user_arr)
-
-      parse = ParseFaculty.new(students)
-      parse.collect_a_class_array("电信12-01")
-      parse.parse_downloaded_faculty_score_txt
-      table_html << parse.print_a_csv_list_user(parse.a_class_user_arr)
-
-      file_ctime = Time.now.getlocal("+08:00").to_s
-      html  = ERB.new(File.read("./template/application.html")).result binding
-      File.write("index.html", html)
-    end
-    sleep(60*60)
-  else
-    puts "not different"
-    sleep(60*60)
-  end
-end
-end
+file_ctime = Time.now.getlocal("+08:00").to_s
+html  = ERB.new(File.read("./template/application.html")).result binding
+File.write("index.html", html)
 
 
 
 
-get '/' do
-  File.read("index.html")
-end
-
-set :public_folder, './public'
 
