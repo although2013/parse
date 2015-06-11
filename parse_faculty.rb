@@ -33,19 +33,17 @@ module GetClassTxt
   def download_text(html)
     puts "download_text"
     html.match /saveAsText.*\s?\{\s+.*src.*"(.*)";$/
-    begin
-      request = Net::HTTP::Get.new(URI($1.to_s))
-      @http.request(request) do |response|
-        return unless response.is_a?(Net::HTTPSuccess)
-        File.open("html_file.tmp", "w") do |file|
-          response.read_body do |segment|
-            file.write(segment)
-          end
+
+    request = Net::HTTP::Get.new(URI($1.to_s))
+    @http.request(request) do |response|
+      return unless response.is_a?(Net::HTTPSuccess)
+      File.open("html_file.tmp", "w") do |file|
+        response.read_body do |segment|
+          file.write(segment)
         end
       end
-    ensure
-      log_out
     end
+
     "SUCCESS"
   end
 
@@ -299,6 +297,7 @@ loop do
     try_download = lambda do
       15.times do |index|
         if "SUCCESS" == me.download_text(page)
+          me.log_out
           puts "TRY SUCCESS"
           return "TRY SUCCESS"
         end
