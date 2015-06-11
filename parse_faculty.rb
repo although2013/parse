@@ -1,5 +1,7 @@
 require "getscore"
 require "erb"
+require "sinatra"
+
 
 
 class Students
@@ -41,7 +43,7 @@ module GetClassTxt
           end
         end
       end
-    ensure Exception => e
+    ensure
       log_out
     end
     "SUCCESS"
@@ -285,7 +287,7 @@ end
 
 
 
-
+Thread.new do
 loop do
   me = CheckOne.new("2012021712", "1")
   me.get_score
@@ -335,5 +337,14 @@ loop do
     sleep(60*60)
   end
 end
+end
 
+
+
+
+get '/' do
+  File.read("index.html")
+end
+
+set :public_folder, './public'
 
