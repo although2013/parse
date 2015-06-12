@@ -14,131 +14,16 @@ class Students
 end
 
 
-module GetClassTxt
-  def get_whole_page
-    puts "get faculty score"
-    request = Net::HTTP::Post.new('/reportFiles/zhjwcx/syxqcjxx/zhjwcx_syxqcjxx_jtcjcx.jsp')
-    request['Cookie'] = @session
-    request.set_form_data("xsh"=>"05", "zxjxjhh"=>"2014-2015-2-1", "bjh"=>"")
-    begin
-      response = @http.request(request)
-    rescue Exception => e
-      log_out
-      exit
-    end
-    body = response.body.force_encoding('gbk').encode('utf-8')
-  end
-
-
-  def download_text(html)
-    puts "download_text"
-    html.match /saveAsText.*\s?\{\s+.*src.*"(.*)";$/
-
-    request = Net::HTTP::Get.new(URI($1.to_s))
-    @http.request(request) do |response|
-      return unless response.is_a?(Net::HTTPSuccess)
-      File.open("html_file.tmp", "w") do |file|
-        response.read_body do |segment|
-          file.write(segment)
-        end
-      end
-    end
-
-    "SUCCESS"
-  end
-
-  def log_out
-    request = Net::HTTP::Post.new('/logout.do')
-    request['Cookie'] = @session
-    request.set_form_data("loginType"=>"platformLogin")
-    response = @http.request(request)
-    puts "logout code: #{response.code}"
-  end
-end
-
 
 class CheckOne
-  attr_accessor :session
-
-  def initialize(username, passwd)
-    @username = username
-    @passwd   = passwd
-    @port     = 80
-    @session  = nil
-    #@user_agent = {
-    #      'User-Agent' => "score-bot, just for test"
-    #}
-
-    check_internet
-    @http = Net::HTTP.new(@host, @port)
-  end
 
   def check_internet
-    #hosts = ["60.219.165.24", "192.168.11.239"]
-    #threads = []
-    #hosts.each do |host|
-    #  threads << Thread.new do
-    #    uri = URI("http://#{host}/loginAction.do")
-    #    response = Net::HTTP.post_form(uri, 'zjh' => @username, 'mm' => @passwd)
-    #    return if "200" != response.code
-    #    threads.each { |thread| Thread.kill(thread) if thread != Thread.current }
-    #    @host = host
-    #    @session = response["set-cookie"]
-    #  end
-    #end
-    #threads.each(&:join)
     host = "60.219.165.24"
     uri = URI("http://#{host}/loginAction.do")
     response = Net::HTTP.post_form(uri, 'zjh' => @username, 'mm' => @passwd)
     return if "200" != response.code
     @host = host
     @session = response["set-cookie"]
-  end
-
-  def get_session
-    puts "force get session, |this method should not run|"
-    request = Net::HTTP::Post.new('/loginAction.do')
-    request.set_form_data({ 'zjh' => @username, 'mm' => @passwd })
-    response = @http.request(request)
-
-    raise "can't get session"  if !response.code == '200'
-    @session = response["set-cookie"]
-  end
-
-  def get_score
-    puts "get my score"
-    raise "get_session first OR no session" if @session == nil
-    request = Net::HTTP::Get.new('/bxqcjcxAction.do')
-    request['Cookie'] = @session
-    response = @http.request(request)
-    @body = response.body.force_encoding('gbk').encode('utf-8').gsub(/\s/,"")
-
-    self
-  end
-
-  def different?
-    puts "diff?"
-    last = File.exist?("last_digest.tmp") ? File.read("last_digest.tmp") : nil
-    now = Digest::SHA2.hexdigest(@body)
-
-    if last == now
-      return false
-    else
-      puts "It's different now!"
-      File.open("last_digest.tmp", "w") { |file| file.print now }
-      return true
-    end
-  end
-
-  def parse_html
-    puts "parse my score"
-    @body =~ /thead(.*)<\/TABLE/
-    arr = $1.scan(/>(.{0,15})<\/td/).map(&:first)
-    max_ulen = arr.map(&:ulen).max
-    puts "---------------------------------------------------"
-    arr.each_slice(7) do |row|
-      printf("%-9s %-4s %-s %s %-5s %-4s %-4s\n",row[0],row[1],row[2],(" "*(max_ulen - row[2].ulen)),row[4],row[5],row[6])
-    end
   end
 
 end
@@ -291,7 +176,7 @@ loop do
   me.get_score
   if me.different?
     page = me.get_whole_page
-    File.open("class_page.tmp", "w") { |file| file.write page }
+    #File.open("class_page.tmp", "w") { |file| file.write page }
     sleep 25
 
     try_download = lambda do
