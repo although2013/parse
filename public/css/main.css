@@ -25,3 +25,7 @@ td {
 h1 {
   text-align: center;
 }
+
+body {
+  margin-bottom: 100px;
+}

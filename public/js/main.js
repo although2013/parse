@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+  window.now_scroll_position = -1
 
   function scroll_in (num) {
     var top = ($($('.a-class table thead')[num]).position()["top"] + $($('.a-class table thead')[num]).height())
@@ -9,13 +10,22 @@ $(document).ready(function () {
 
   function check_position () {
     if (scroll_in(0)) {
-      $(".my-top-fix").remove()
-      add_top_bar(0)
+      if (now_scroll_position != 0) {
+        now_scroll_position = 0
+        $(".my-top-fix").remove()
+        add_top_bar(0)
+      };
     } else if (scroll_in(1)) {
-      $(".my-top-fix").remove()
-      add_top_bar(1)
+      if (now_scroll_position != 1) {
+        now_scroll_position = 1
+        $(".my-top-fix").remove()
+        add_top_bar(1)
+      };
     } else {
-      $(".my-top-fix").remove()
+      if (now_scroll_position != -1) {
+        now_scroll_position = -1
+        $(".my-top-fix").remove()
+      }
     }
   };
 
@@ -36,9 +46,11 @@ $(document).ready(function () {
   };
 
 
-  setInterval(function() {
-    check_position();
-  }, 150);
+  if ($(window).width() > 650) {
+    setInterval(function() {
+      check_position();
+    }, 150);
+  };
 
 
 
