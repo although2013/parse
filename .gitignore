@@ -1,0 +1,8 @@
+tmp/*
+
+*.tmp
+*.html
+
+!parse_faculty.rb
+!Gemfile
+!Gemfile.lock
