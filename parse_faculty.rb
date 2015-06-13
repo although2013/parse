@@ -177,7 +177,7 @@ loop do
   if me.different?
     page = me.get_whole_page
     #File.open("class_page.tmp", "w") { |file| file.write page }
-    sleep 25
+    sleep 15
 
     try_download = lambda do
       15.times do |index|
