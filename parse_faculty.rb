@@ -140,7 +140,7 @@ class ParseFaculty
 
     table_str = gen_table(has_array)
 
-    File.write("./tmp/#{@class_name}_table.html", table_str)
+    #File.write("./tmp/#{@class_name}_table.html", table_str)
     table_str
   end
 
@@ -213,12 +213,14 @@ loop do
 
       file_ctime = Time.now.getlocal("+08:00").to_s
       html  = ERB.new(File.read("./template/application.html")).result binding
-      File.write("index.html", html)
+
+      $index_html = html
+      #File.open("index.html", "w") { |f| f.write(html) }
     end
-    sleep(60*60)
+    sleep(3*60*60)
   else
     puts "not different"
-    sleep(60*60)
+    sleep(3*60*60)
   end
 end
 end
@@ -227,7 +229,7 @@ end
 
 
 get '/' do
-  File.read("index.html")
+  $index_html ||= "please wait some seconds, and refresh page."
 end
 
 set :public_folder, './public'
