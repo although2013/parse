@@ -226,10 +226,13 @@ end
 end
 
 
+$Heroku_500 = File.read("./template/heroku_500.html")
+
+
 
 
 get '/' do
-  $index_html ||= "please wait some seconds, and refresh page."
+  $index_html ||= $Heroku_500
 end
 
 set :public_folder, './public'

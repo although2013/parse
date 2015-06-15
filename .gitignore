@@ -3,6 +3,8 @@ tmp/*
 *.tmp
 *.html
 
+!template/*.html
+
 !parse_faculty.rb
 !Gemfile
 !Gemfile.lock

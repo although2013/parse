@@ -1,0 +1,30 @@
+<p><span></span> 秒后自动刷新页面 </p>
+<pre>
+
+
+      可能由于使用免费的 Heroku账户 原因，这个页面每隔一段时间没有人访问就会休眠
+      
+      <strong>现在正在重新初始化获取班级成绩，大概需要30秒钟的时间，</strong>
+      
+      完成后会自动刷新页面，你也可以等待一会儿然后F5手动刷新
+
+
+
+      如果你一直看到这条消息，而没有成绩页面显示的话，说明这个程序坏掉了。。
+      那么请联系我。。
+
+</pre>
+
+<script>
+    down = 30
+    document.getElementsByTagName('span')[0].innerHTML = down
+
+    setInterval(function() {
+      down = down - 1
+      document.getElementsByTagName('span')[0].innerHTML = down
+    }, 1000);
+
+    setTimeout(function() {
+        location.reload();
+    },1000*down)
+</script>
