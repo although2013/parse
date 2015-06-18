@@ -1,4 +1,4 @@
-require './parse_faculty'
+require './run'
 
 $stdout.sync = true
 

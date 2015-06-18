@@ -35,8 +35,8 @@ $(document).ready(function () {
     $(".my-top-fix table thead").append(str)
 
 
-    $($('.my-top-fix table thead th')[0]).addClass( "not-show-white" ).text("0000000000")
-    $($('.my-top-fix table thead th')[1]).addClass( "not-show-white" ).text("王王王")
+    $($('.my-top-fix table thead th')[0]).addClass( "not-show-white" ).text("0000000000").css("font-weight","400")
+    $($('.my-top-fix table thead th')[1]).addClass( "not-show-white" ).text("王王王").css("font-weight","400")
 
     var delt = $($('.a-class table thead')[num]).width() - $('.my-top-fix').width()
     var left = $($('.a-class table thead')[num]).position()["left"] - $(window).scrollLeft()
