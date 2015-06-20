@@ -75,8 +75,6 @@ loop do
       table_html << doOneClass(students, "电信12-03")
       table_html << doOneClass(students, "电信12-01")
 
-      puts table_html
-
 
       file_ctime = Time.now.getlocal("+08:00").to_s
       html  = ERB.new(File.read("./template/application.html").force_encoding("utf-8")).result binding

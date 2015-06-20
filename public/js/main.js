@@ -46,7 +46,7 @@ $(document).ready(function () {
   };
 
 
-  if ($(window).width() > 650) {
+  if ($(window).width() > 799) {
     setInterval(function() {
       check_position();
     }, 150);
