@@ -18,6 +18,3 @@ PLATFORMS
 DEPENDENCIES
   getscore (>= 0.9.2)
   sinatra
-
-BUNDLED WITH
-   1.10.3

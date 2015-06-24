@@ -90,6 +90,13 @@ loop do
 end
 end
 
+Thread.new do
+  loop do
+    Net::HTTP.get(URI("http://getscore.herokuapp.com/"))
+    sleep(60*20)
+  end
+end
+
 
 $Heroku_500 = File.read("./template/heroku_500.html").force_encoding("utf-8")
 
