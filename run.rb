@@ -43,57 +43,49 @@ $index_html = nil
 
 
 Thread.new do
-loop do
-  me = CheckOne.new("2012021712", "1")
-  me.get_score
-  if me.different?
-    page = me.get_whole_page
-    sleep 15
-
-    try_download = lambda do
-      5.times do |index|
-        if "SUCCESS" == me.download_text(page)
-          me.log_out
-          puts "TRY SUCCESS"
-          return "TRY SUCCESS"
-        end
-        sleep(3)
-      end
-      puts "TRY FAILURE"
-      return "TRY FAILURE"
-    end
-
-    try_sign = try_download.call
-
-    if try_sign == "TRY FAILURE"
-      sleep(2*60*60)
-      next
-    elsif try_sign == "TRY SUCCESS"
-      table_html = []
-      students = Students.new.all
-
-      table_html << doOneClass(students, "电信12-03")
-      table_html << doOneClass(students, "电信12-01")
-
-
-      file_ctime = Time.now.getlocal("+08:00").to_s
-      html  = ERB.new(File.read("./template/application.html").force_encoding("utf-8")).result binding
-
-      $index_html = html
-      #File.open("index.html", "w") { |f| f.write(html) }
-    end
-    sleep(3*60*60)
-  else
-    puts "not different"
-    sleep(2*60*60)
-  end
-end
-end
-
-Thread.new do
   loop do
-    Net::HTTP.get(URI("http://getscore.herokuapp.com/"))
-    sleep(60*20)
+    me = CheckOne.new("2012021712", "1")
+    me.get_score
+    if me.different?
+      page = me.get_whole_page
+      sleep 15
+
+      try_download = lambda do
+        5.times do |index|
+          if "SUCCESS" == me.download_text(page)
+            me.log_out
+            puts "TRY SUCCESS"
+            return "TRY SUCCESS"
+          end
+          sleep(3)
+        end
+        puts "TRY FAILURE"
+        return "TRY FAILURE"
+      end
+
+      try_sign = try_download.call
+
+      if try_sign == "TRY FAILURE"
+        sleep(2*60*60)
+        next
+      elsif try_sign == "TRY SUCCESS"
+        table_html = []
+        students = Students.new.all
+
+        table_html << doOneClass(students, "电信12-03")
+        table_html << doOneClass(students, "电信12-01")
+
+        file_ctime = Time.now.getlocal("+08:00").to_s
+        html  = ERB.new(File.read("./template/application.html").force_encoding("utf-8")).result binding
+
+        $index_html = html
+        File.open("index.html.tmp", "w") { |f| f.write(html) }
+      end
+      sleep(3*60*60)
+    else
+      puts "not different"
+      sleep(2*60*60)
+    end
   end
 end
 

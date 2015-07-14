@@ -1,3 +1,22 @@
+class String
+  def short
+    max = 6
+    if self.length > max
+      "#{self[0,max]}..."
+    else
+      self
+    end
+  end
+
+
+  #等宽字体中英文混合时占用的宽度，UTF-8
+  def ulen()
+    puts "#{self.bytesize} #{self.length}"
+    (self.bytesize + self.length) / 2
+  end
+end
+
+
 class ParseFaculty
   attr_accessor :students, :classes, :a_class_user_arr
 
@@ -55,7 +74,7 @@ class ParseFaculty
 
   def print_a_csv_list_user(user_arr)
     append_str("\t\t")
-    @classes.each {|c_name| append_str("#{c_name}\t")}
+    @classes.each {|c_name| append_str("#{c_name.short}\t")}
     append_str("\n")
 
     user_arr.each do |u|
@@ -88,14 +107,17 @@ class ParseFaculty
     arr = str.split("\n").map { |e| e.split("\t") }
     has_array = []
     str = []
+    next_line = false
     # 置换列与行
     arr = arr[0].zip(*arr[1..-1])
     arr.each do |column|
+      len = column.length
       column.each_with_index do |cell, index|
         next if index == 0
-        if cell && cell.length > 0
+        if ((!cell) || (cell.length <= 0))
+          next
+        elsif index == len-1
           has_array << column
-          break
         end
       end
     end
